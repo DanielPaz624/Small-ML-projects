@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAC-MAN</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <header>
+            <h1>PAC-MAN</h1>
+            <div id="score-board">
+                <div class="score-item">
+                    <span class="label">SCORE</span>
+                    <span id="score">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="label">HIGH SCORE</span>
+                    <span id="high-score">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="label">LIVES</span>
+                    <span id="lives"></span>
+                </div>
+            </div>
+        </header>
+
+        <canvas id="game-canvas"></canvas>
+
+        <div id="start-screen" class="overlay">
+            <h2>PAC-MAN</h2>
+            <p>Use <strong>Arrow Keys</strong> or <strong>WASD</strong> to move</p>
+            <p>Eat all dots to win!</p>
+            <p>Eat power pellets to chase ghosts!</p>
+            <button id="start-btn">START GAME</button>
+        </div>
+
+        <div id="game-over-screen" class="overlay hidden">
+            <h2 id="end-title">GAME OVER</h2>
+            <p id="final-score-text">Score: 0</p>
+            <button id="restart-btn">PLAY AGAIN</button>
+        </div>
+
+        <footer>
+            <p>Move: Arrow Keys / WASD &bull; P: Pause</p>
+        </footer>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    color: #fff;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+#game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+header h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #ffff00;
+    text-shadow: 0 0 10px #ffff00, 0 0 20px #ffff00;
+    letter-spacing: 8px;
+    margin-bottom: 8px;
+}
+
+#score-board {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 5px;
+}
+
+.score-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.score-item .label {
+    font-size: 0.75rem;
+    color: #888;
+    letter-spacing: 2px;
+}
+
+.score-item span:last-child {
+    font-size: 1.3rem;
+    color: #fff;
+}
+
+#game-canvas {
+    border: 3px solid #2121de;
+    border-radius: 4px;
+    box-shadow: 0 0 15px rgba(33, 33, 222, 0.4);
+    display: block;
+}
+
+.overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.92);
+    border: 3px solid #2121de;
+    border-radius: 12px;
+    padding: 40px 50px;
+    text-align: center;
+    z-index: 10;
+    box-shadow: 0 0 30px rgba(33, 33, 222, 0.5);
+}
+
+.overlay.hidden {
+    display: none;
+}
+
+.overlay h2 {
+    font-size: 2.2rem;
+    color: #ffff00;
+    text-shadow: 0 0 10px #ffff00;
+    margin-bottom: 20px;
+    letter-spacing: 4px;
+}
+
+.overlay p {
+    font-size: 0.95rem;
+    color: #ccc;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.overlay button {
+    margin-top: 18px;
+    padding: 12px 36px;
+    font-size: 1.1rem;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    background: #ffff00;
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    letter-spacing: 3px;
+    transition: all 0.2s;
+}
+
+.overlay button:hover {
+    background: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 255, 0, 0.5);
+}
+
+footer {
+    margin-top: 5px;
+}
+
+footer p {
+    font-size: 0.75rem;
+    color: #555;
+    letter-spacing: 1px;
+}
