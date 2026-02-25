@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Athens Trip — Expenses</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f5f5f0;
+      color: #1a1a1a;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e8e8e4;
+      padding: 20px 24px;
+    }
+
+    header h1 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    header p {
+      font-size: 0.8rem;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+
+    /* Balance card */
+    .balance-card {
+      background: #fff;
+      border: 1px solid #e8e8e4;
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+    }
+
+    .balance-card h2 {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #888;
+      margin-bottom: 16px;
+    }
+
+    .balance-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .balance-table th {
+      text-align: left;
+      padding: 6px 0;
+      color: #888;
+      font-weight: 500;
+      font-size: 0.78rem;
+      border-bottom: 1px solid #e8e8e4;
+    }
+
+    .balance-table td {
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0ec;
+    }
+
+    .balance-table tr:last-child td { border-bottom: none; }
+
+    .amount-paid { color: #1a1a1a; font-weight: 500; }
+    .amount-owed { color: #888; }
+
+    .net-positive { color: #22863a; font-weight: 600; }
+    .net-negative { color: #cb2431; font-weight: 600; }
+    .net-zero { color: #888; font-weight: 500; }
+
+    .settlement {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid #e8e8e4;
+      font-size: 0.85rem;
+      color: #444;
+    }
+
+    .settlement strong { color: #1a1a1a; }
+
+    /* Add expense */
+    .add-section {
+      background: #fff;
+      border: 1px solid #e8e8e4;
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+    }
+
+    .add-section h2 {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #888;
+      margin-bottom: 16px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .form-row.full { grid-template-columns: 1fr; }
+
+    label {
+      display: block;
+      font-size: 0.75rem;
+      color: #888;
+      margin-bottom: 4px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 9px 11px;
+      border: 1px solid #e0e0da;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      background: #fafaf8;
+      color: #1a1a1a;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    input:focus, select:focus { border-color: #888; background: #fff; }
+
+    button.primary {
+      width: 100%;
+      padding: 10px;
+      background: #1a1a1a;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 4px;
+      transition: background 0.15s;
+    }
+
+    button.primary:hover { background: #333; }
+    button.primary:disabled { background: #999; cursor: not-allowed; }
+
+    /* Expense list */
+    .expenses-section {
+      background: #fff;
+      border: 1px solid #e8e8e4;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .expenses-section h2 {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #888;
+      padding: 16px 24px 12px;
+      border-bottom: 1px solid #e8e8e4;
+    }
+
+    .expense-list { list-style: none; }
+
+    .expense-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 24px;
+      border-bottom: 1px solid #f0f0ec;
+      font-size: 0.88rem;
+    }
+
+    .expense-item:last-child { border-bottom: none; }
+
+    .expense-info { flex: 1; }
+
+    .expense-desc {
+      font-weight: 500;
+      color: #1a1a1a;
+    }
+
+    .expense-meta {
+      font-size: 0.75rem;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    .expense-amount {
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-right: 14px;
+    }
+
+    .delete-btn {
+      background: none;
+      border: none;
+      color: #ccc;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 2px 4px;
+      border-radius: 4px;
+      transition: color 0.15s;
+    }
+
+    .delete-btn:hover { color: #cb2431; }
+
+    .empty-state {
+      padding: 32px 24px;
+      text-align: center;
+      color: #aaa;
+      font-size: 0.85rem;
+    }
+
+    .split-tag {
+      display: inline-block;
+      background: #f0f0ec;
+      color: #666;
+      font-size: 0.68rem;
+      padding: 1px 5px;
+      border-radius: 3px;
+      margin-left: 5px;
+      font-weight: 500;
+    }
+
+    /* Loading / status */
+    .status-bar {
+      text-align: center;
+      font-size: 0.78rem;
+      color: #888;
+      padding: 8px 0;
+      min-height: 28px;
+      transition: opacity 0.2s;
+    }
+
+    .status-bar.error { color: #cb2431; }
+
+    /* Beer celebration */
+    #beer-overlay {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      overflow: hidden;
+    }
+
+    .beer-emoji {
+      position: absolute;
+      font-size: 2rem;
+      animation: beerFall 1.4s ease-in forwards;
+      user-select: none;
+    }
+
+    @keyframes beerFall {
+      0%   { transform: translateY(-60px) rotate(0deg); opacity: 1; }
+      80%  { opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    .cheer-toast {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.5);
+      background: #fff;
+      border: 2px solid #e8e8e4;
+      border-radius: 14px;
+      padding: 18px 32px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      z-index: 10000;
+      pointer-events: none;
+      animation: toastPop 1.8s ease forwards;
+      white-space: nowrap;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    }
+
+    @keyframes toastPop {
+      0%   { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+      20%  { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+      35%  { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
+      75%  { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(0.9); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Athens Trip</h1>
+  <p>Daniel & Simcha</p>
+</header>
+
+<div id="beer-overlay"></div>
+<div class="container">
+
+  <!-- Status bar -->
+  <div class="status-bar" id="status"></div>
+
+  <!-- Balance -->
+  <div class="balance-card">
+    <h2>Balance</h2>
+    <table class="balance-table">
+      <thead>
+        <tr>
+          <th>Person</th>
+          <th>Paid</th>
+          <th>Share</th>
+          <th>Net</th>
+        </tr>
+      </thead>
+      <tbody id="balance-body"></tbody>
+    </table>
+    <div class="settlement" id="settlement-text"></div>
+  </div>
+
+  <!-- Add expense -->
+  <div class="add-section">
+    <h2>Add Expense</h2>
+    <div class="form-row full">
+      <div>
+        <label>Description</label>
+        <input type="text" id="desc" placeholder="e.g. Dinner at Monastiraki" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div>
+        <label>Amount (€)</label>
+        <input type="number" id="amount" placeholder="0" min="0" step="0.01" />
+      </div>
+      <div>
+        <label>Paid by</label>
+        <select id="payer">
+          <option value="Daniel">Daniel</option>
+          <option value="Simcha">Simcha</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div>
+        <label>Split</label>
+        <select id="split">
+          <option value="equal">Equal (50/50)</option>
+          <option value="Daniel">Daniel only</option>
+          <option value="Simcha">Simcha only</option>
+        </select>
+      </div>
+      <div>
+        <label>Date</label>
+        <input type="date" id="date" />
+      </div>
+    </div>
+    <button class="primary" id="add-btn" onclick="addExpense()">Add Expense</button>
+  </div>
+
+  <!-- Expense list -->
+  <div class="expenses-section">
+    <h2>Expenses</h2>
+    <ul class="expense-list" id="expense-list"></ul>
+  </div>
+
+</div>
+
+<script>
+  const PEOPLE  = ['Daniel', 'Simcha'];
+  const API_KEY = '$2a$10$DCoftimzEqDZ6cK7KRQJEelWFkmZOaT5q8I2P3VjlC0X6cV2A7xHO';
+  const BIN_ID  = '699ec7e9d0ea881f40d7a425';
+  const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+
+  let expenses = [];
+  let busy = false;
+
+  // ── UI helpers ────────────────────────────────────────────────────
+  function setStatus(msg, isError = false) {
+    const el = document.getElementById('status');
+    el.textContent = msg;
+    el.className = 'status-bar' + (isError ? ' error' : '');
+  }
+
+  function setBusy(state) {
+    busy = state;
+    document.getElementById('add-btn').disabled = state;
+    document.querySelectorAll('.delete-btn').forEach(b => b.disabled = state);
+  }
+
+  // ── JSONBin API ───────────────────────────────────────────────────
+  async function loadFromCloud() {
+    const res = await fetch(`${BIN_URL}/latest`, {
+      headers: { 'X-Master-Key': API_KEY }
+    });
+    if (!res.ok) throw new Error(`Load failed (${res.status})`);
+    const data = await res.json();
+    return data.record.expenses || [];
+  }
+
+  async function saveToCloud(data) {
+    const res = await fetch(BIN_URL, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Master-Key': API_KEY
+      },
+      body: JSON.stringify({ expenses: data })
+    });
+    if (!res.ok) throw new Error(`Save failed (${res.status})`);
+  }
+
+  // ── Core logic ────────────────────────────────────────────────────
+  function formatAmount(n) {
+    return '€' + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  function calcBalance(exps) {
+    const paid = { Daniel: 0, Simcha: 0 };
+    const owed = { Daniel: 0, Simcha: 0 };
+    for (const e of exps) {
+      paid[e.payer] += e.amount;
+      if (e.split === 'equal') {
+        owed.Daniel += e.amount / 2;
+        owed.Simcha += e.amount / 2;
+      } else {
+        owed[e.split] += e.amount;
+      }
+    }
+    return { paid, owed };
+  }
+
+  function render() {
+    const { paid, owed } = calcBalance(expenses);
+
+    // Balance table
+    const tbody = document.getElementById('balance-body');
+    tbody.innerHTML = '';
+    for (const p of PEOPLE) {
+      const net = paid[p] - owed[p];
+      const cls = net > 0.005 ? 'net-positive' : net < -0.005 ? 'net-negative' : 'net-zero';
+      const netStr = (net >= 0 ? '+' : '') + formatAmount(net);
+      tbody.innerHTML += `
+        <tr>
+          <td><strong>${p}</strong></td>
+          <td class="amount-paid">${formatAmount(paid[p])}</td>
+          <td class="amount-owed">${formatAmount(owed[p])}</td>
+          <td class="${cls}">${netStr}</td>
+        </tr>`;
+    }
+
+    // Settlement line
+    const netDaniel = paid.Daniel - owed.Daniel;
+    const el = document.getElementById('settlement-text');
+    if (Math.abs(netDaniel) < 0.01) {
+      el.innerHTML = 'All settled up.';
+    } else if (netDaniel > 0) {
+      el.innerHTML = `<strong>Simcha</strong> owes <strong>Daniel</strong> ${formatAmount(netDaniel)}`;
+    } else {
+      el.innerHTML = `<strong>Daniel</strong> owes <strong>Simcha</strong> ${formatAmount(-netDaniel)}`;
+    }
+
+    // Expense list
+    const list = document.getElementById('expense-list');
+    if (expenses.length === 0) {
+      list.innerHTML = '<li class="empty-state">No expenses yet</li>';
+      return;
+    }
+
+    list.innerHTML = expenses.slice().reverse().map((e, ri) => {
+      const i = expenses.length - 1 - ri;
+      const splitLabel = e.split === 'equal' ? '50/50' : e.split + ' only';
+      const dateStr = e.date
+        ? new Date(e.date + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })
+        : '';
+      return `
+        <li class="expense-item">
+          <div class="expense-info">
+            <div class="expense-desc">${escHtml(e.desc)}<span class="split-tag">${escHtml(splitLabel)}</span></div>
+            <div class="expense-meta">Paid by ${e.payer}${dateStr ? ' · ' + dateStr : ''}</div>
+          </div>
+          <span class="expense-amount">${formatAmount(e.amount)}</span>
+          <button class="delete-btn" onclick="deleteExpense(${i})" title="Delete">✕</button>
+        </li>`;
+    }).join('');
+  }
+
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  async function addExpense() {
+    if (busy) return;
+    const desc   = document.getElementById('desc').value.trim();
+    const amount = parseFloat(document.getElementById('amount').value);
+    const payer  = document.getElementById('payer').value;
+    const split  = document.getElementById('split').value;
+    const date   = document.getElementById('date').value;
+
+    if (!desc || isNaN(amount) || amount <= 0) {
+      alert('Please enter a description and a valid amount.');
+      return;
+    }
+
+    setBusy(true);
+    setStatus('Saving…');
+    try {
+      const updated = [...expenses, { desc, amount, payer, split, date }];
+      await saveToCloud(updated);
+      expenses = updated;
+
+      document.getElementById('desc').value = '';
+      document.getElementById('amount').value = '';
+      document.getElementById('date').valueAsDate = new Date();
+
+      if (/beer/i.test(desc)) celebrateBeer();
+      setStatus('Saved.');
+      setTimeout(() => setStatus(''), 2000);
+      render();
+    } catch (err) {
+      setStatus('Could not save: ' + err.message, true);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function deleteExpense(i) {
+    if (busy) return;
+    if (!confirm('Delete this expense?')) return;
+
+    setBusy(true);
+    setStatus('Deleting…');
+    try {
+      const updated = expenses.filter((_, idx) => idx !== i);
+      await saveToCloud(updated);
+      expenses = updated;
+      setStatus('Deleted.');
+      setTimeout(() => setStatus(''), 2000);
+      render();
+    } catch (err) {
+      setStatus('Could not delete: ' + err.message, true);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function celebrateBeer() {
+    const overlay = document.getElementById('beer-overlay');
+    const emojis = ['🍺','🍻','🍺','🎉','🍺','🥂','🍺','🍻'];
+    const count = 28;
+    for (let i = 0; i < count; i++) {
+      setTimeout(() => {
+        const el = document.createElement('span');
+        el.className = 'beer-emoji';
+        el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        el.style.left = Math.random() * 100 + 'vw';
+        el.style.animationDuration = (1.1 + Math.random() * 0.8) + 's';
+        el.style.fontSize = (1.4 + Math.random() * 1.4) + 'rem';
+        overlay.appendChild(el);
+        el.addEventListener('animationend', () => el.remove());
+      }, i * 60);
+    }
+    const toast = document.createElement('div');
+    toast.className = 'cheer-toast';
+    toast.textContent = '🍺 Cheers! 🍻';
+    document.body.appendChild(toast);
+    toast.addEventListener('animationend', () => toast.remove());
+  }
+
+  // Allow Enter key to submit
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && (e.target.id === 'desc' || e.target.id === 'amount')) {
+      addExpense();
+    }
+  });
+
+  // ── Init ──────────────────────────────────────────────────────────
+  async function init() {
+    setStatus('Loading expenses…');
+    document.getElementById('expense-list').innerHTML =
+      '<li class="empty-state">Loading…</li>';
+    try {
+      expenses = await loadFromCloud();
+      setStatus('');
+      render();
+    } catch (err) {
+      setStatus('Could not load expenses: ' + err.message, true);
+      document.getElementById('expense-list').innerHTML =
+        '<li class="empty-state">Failed to load. Check your connection.</li>';
+    }
+  }
+
+  document.getElementById('date').valueAsDate = new Date();
+  init();
+</script>
+</body>
+</html>
