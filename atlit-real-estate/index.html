@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>עסקאות נדל״ן – עתלית</title>
+  <title>עסקאות נדל׳ן – עתלית</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -24,11 +24,7 @@
       flex-wrap: wrap;
       gap: 12px;
     }
-    header h1 {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-    }
+    header h1 { font-size: 22px; font-weight: 700; }
     header h1 span { color: #7ec8f8; }
 
     #sync-btn {
@@ -64,34 +60,17 @@
     .meta-bar .info { color: #555; font-size: 13px; }
     .meta-bar .info strong { color: #1a3a5c; }
 
-    .legend {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13px;
-      color: #555;
-    }
-    .legend-dot {
-      width: 14px; height: 14px;
-      border-radius: 3px;
-      border: 1px solid rgba(0,0,0,0.15);
-    }
+    .legend { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #555; }
+    .legend-dot { width: 14px; height: 14px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.15); }
     .dot-recent { background: #d4f1c4; }
     .dot-normal { background: #fff; border-color: #ccc; }
 
-    #status-msg {
-      padding: 10px 24px;
-      font-size: 13px;
-      display: none;
-    }
-    #status-msg.info { background: #e3f2fd; color: #0d47a1; display: block; }
-    #status-msg.error { background: #fce4ec; color: #b71c1c; display: block; }
+    #status-msg { padding: 10px 24px; font-size: 13px; display: none; }
+    #status-msg.info    { background: #e3f2fd; color: #0d47a1; display: block; }
+    #status-msg.error   { background: #fce4ec; color: #b71c1c; display: block; }
     #status-msg.success { background: #e8f5e9; color: #1b5e20; display: block; }
 
-    .table-wrap {
-      padding: 16px 24px;
-      overflow-x: auto;
-    }
+    .table-wrap { padding: 16px 24px; overflow-x: auto; }
 
     table {
       width: 100%;
@@ -101,7 +80,6 @@
       overflow: hidden;
       box-shadow: 0 1px 4px rgba(0,0,0,0.10);
     }
-
     thead th {
       background: #1a3a5c;
       color: #fff;
@@ -119,96 +97,58 @@
     thead th .sort-icon { margin-right: 4px; opacity: 0.5; font-size: 11px; }
     thead th.sorted .sort-icon { opacity: 1; }
 
-    tbody tr {
-      border-bottom: 1px solid #f0f0f0;
-      transition: background 0.15s;
-    }
+    tbody tr { border-bottom: 1px solid #f0f0f0; transition: background 0.15s; }
     tbody tr:last-child { border-bottom: none; }
-    tbody tr.recent {
-      background: #d4f1c4;
-    }
+    tbody tr.recent { background: #d4f1c4; }
     tbody tr:not(.recent):nth-child(even) { background: #fafafa; }
     tbody tr:hover { background: #e8f5e9 !important; }
 
-    td {
-      padding: 9px 12px;
-      vertical-align: middle;
-      font-size: 13px;
-    }
+    td { padding: 9px 12px; vertical-align: middle; font-size: 13px; }
 
     .price-sqm { font-weight: 600; color: #1565c0; }
     .new-tag {
-      background: #ff7043;
-      color: #fff;
-      font-size: 10px;
-      padding: 2px 5px;
-      border-radius: 3px;
-      margin-right: 4px;
-      white-space: nowrap;
+      background: #ff7043; color: #fff; font-size: 10px;
+      padding: 2px 5px; border-radius: 3px; margin-right: 4px;
     }
     .null-val { color: #bbb; }
     .date-badge {
-      display: inline-block;
-      background: #e3eaf5;
-      color: #1a3a5c;
-      border-radius: 4px;
-      padding: 2px 7px;
-      font-size: 12px;
-      font-weight: 600;
+      display: inline-block; background: #e3eaf5; color: #1a3a5c;
+      border-radius: 4px; padding: 2px 7px; font-size: 12px; font-weight: 600;
     }
     .recent .date-badge { background: #a5d6a7; color: #1b5e20; }
 
-    #empty-state {
-      text-align: center;
-      padding: 60px 24px;
-      color: #888;
-    }
+    #empty-state { text-align: center; padding: 60px 24px; color: #888; }
     #empty-state h2 { font-size: 20px; margin-bottom: 8px; color: #555; }
-    #empty-state p { font-size: 14px; }
 
     /* Modal */
     .modal-bg {
-      display: none;
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.5); z-index: 1000;
+      align-items: center; justify-content: center;
     }
     .modal-bg.open { display: flex; }
     .modal {
-      background: #fff;
-      border-radius: 10px;
-      padding: 28px;
-      width: 400px;
-      max-width: 95vw;
+      background: #fff; border-radius: 10px; padding: 28px;
+      width: 460px; max-width: 95vw;
       box-shadow: 0 8px 32px rgba(0,0,0,0.2);
     }
     .modal h2 { margin-bottom: 12px; font-size: 18px; color: #1a3a5c; }
-    .modal p { font-size: 13px; color: #555; margin-bottom: 16px; line-height: 1.6; }
-    .modal label { font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px; }
-    .modal input {
-      width: 100%; padding: 9px 12px; border: 1px solid #ccc;
-      border-radius: 6px; font-size: 13px; direction: ltr;
+    .modal p { font-size: 13px; color: #555; margin-bottom: 14px; line-height: 1.7; }
+    .code-box {
+      background: #1e1e1e; color: #d4d4d4;
+      border-radius: 6px; padding: 12px 16px;
+      font-family: monospace; font-size: 13px;
+      direction: ltr; text-align: left;
+      margin-bottom: 14px;
+      white-space: pre;
     }
-    .modal input:focus { outline: 2px solid #2196f3; border-color: #2196f3; }
-    .modal-actions {
-      margin-top: 18px;
-      display: flex;
-      gap: 10px;
-      justify-content: flex-end;
-    }
+    .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
     .btn-primary {
       background: #2196f3; color: #fff; border: none;
       padding: 9px 20px; border-radius: 6px; font-size: 13px;
       font-weight: 600; cursor: pointer;
     }
     .btn-primary:hover { background: #1976d2; }
-    .btn-ghost {
-      background: transparent; color: #555; border: 1px solid #ccc;
-      padding: 9px 16px; border-radius: 6px; font-size: 13px; cursor: pointer;
-    }
-    .btn-ghost:hover { background: #f5f5f5; }
 
     @media (max-width: 600px) {
       header { padding: 12px 16px; }
@@ -220,7 +160,7 @@
 <body>
 
 <header>
-  <h1>עסקאות נדל״ן – <span>עתלית</span></h1>
+  <h1>עסקאות נדל׳ן – <span>עתלית</span></h1>
   <button id="sync-btn" onclick="syncDeals()">
     <svg viewBox="0 0 24 24"><path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
     סנכרון
@@ -230,10 +170,8 @@
 <div class="meta-bar">
   <div class="info" id="meta-info">טוען נתונים...</div>
   <div class="legend">
-    <div class="legend-dot dot-recent"></div>
-    <span>עסקה ב-30 יום האחרונים</span>
-    <div class="legend-dot dot-normal" style="margin-right:12px"></div>
-    <span>עסקה ישנה יותר</span>
+    <div class="legend-dot dot-recent"></div><span>עסקה ב-30 יום האחרונים</span>
+    <div class="legend-dot dot-normal" style="margin-right:12px"></div><span>עסקה ישנה יותר</span>
   </div>
 </div>
 
@@ -242,34 +180,31 @@
 <div class="table-wrap" id="content">
   <div id="empty-state">
     <h2>אין נתונים</h2>
-    <p>לחץ על כפתור <strong>סנכרון</strong> כדי למשוך את עסקאות הנדל״ן האחרונות בעתלית.</p>
+    <p>הרץ את <strong>sync_server.py</strong> על המחשב שלך ולחץ על <strong>סנכרון</strong>.</p>
   </div>
 </div>
 
-<!-- PAT Modal -->
-<div class="modal-bg" id="pat-modal">
+<!-- Server instructions modal -->
+<div class="modal-bg" id="server-modal">
   <div class="modal">
-    <h2>הגדרת GitHub Token</h2>
+    <h2>הפעל שרת סנכרון</h2>
     <p>
-      כדי להפעיל את הסנכרון, יש להזין <strong>GitHub Personal Access Token (PAT)</strong>
-      עם הרשאות <code>repo</code> ו-<code>workflow</code>.<br/><br/>
-      הטוקן נשמר רק בדפדפן שלך (localStorage) ואינו נשלח לשום שרת.
+      כדי לסנכרן, יש להריץ את שרת הסנכרון על <strong>המחשב שלך</strong> (בישראל).
+      פתח טרמינל בתיקיית הריפו והרץ:
     </p>
-    <label for="pat-input">Personal Access Token:</label>
-    <input type="password" id="pat-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" />
+    <div class="code-box">pip install requests
+python atlit-real-estate/sync_server.py</div>
+    <p>השרת ירוץ ברקע — השאר את הטרמינל פתוח. לאחר מכן לחץ שוב על <strong>סנכרון</strong>.</p>
     <div class="modal-actions">
-      <button class="btn-ghost" onclick="closeModal()">ביטול</button>
-      <button class="btn-primary" onclick="savePat()">שמור והפעל סנכרון</button>
+      <button class="btn-primary" onclick="closeServerModal()">הבנתי</button>
     </div>
   </div>
 </div>
 
 <script>
-  const REPO_OWNER   = 'danielpaz624';
-  const REPO_NAME    = 'Small-ML-projects';
-  const WORKFLOW_ID  = 'fetch-atlit-deals.yml';
-  const BRANCH       = 'main';
-  const DATA_URL     = './data/deals.json';
+  const DATA_URL      = './data/deals.json';
+  const LOCAL_SERVER  = 'http://localhost:8765';
+  const RELOAD_DELAY  = 75000; // 75s for GitHub Pages to propagate
 
   let allDeals = [];
   let sortCol  = 'date';
@@ -319,15 +254,15 @@
       { key: 'type',        label: 'סוג נכס' },
       { key: 'rooms',       label: 'חדרים' },
       { key: 'floor',       label: 'קומה' },
-      { key: 'area',        label: 'שטח (מ״ר)' },
+      { key: 'area',        label: 'שטח (מ׳ר)' },
       { key: 'price',       label: 'מחיר' },
-      { key: 'pricePerSqm', label: '₪/מ״ר' },
+      { key: 'pricePerSqm', label: '₪/מ׳ר' },
     ];
 
     const thead = cols.map(c => {
-      const sorted = c.key === sortCol ? ' sorted' : '';
-      const icon   = c.key === sortCol ? (sortAsc ? '▲' : '▼') : '⇅';
-      return `<th class="${sorted}" onclick="sort('${c.key}')">
+      const isSorted = c.key === sortCol;
+      const icon = isSorted ? (sortAsc ? '▲' : '▼') : '⇅';
+      return `<th class="${isSorted ? 'sorted' : ''}" onclick="sort('${c.key}')">
         ${c.label}<span class="sort-icon">${icon}</span>
       </th>`;
     }).join('');
@@ -338,32 +273,29 @@
         <td>${fmtDate(deal.date)}</td>
         <td>${fmtAddress(deal)}</td>
         <td>${deal.type || dash()}</td>
-        <td>${deal.rooms !== null && deal.rooms !== undefined ? deal.rooms : dash()}</td>
-        <td>${deal.floor !== null && deal.floor !== undefined ? deal.floor : dash()}</td>
-        <td>${deal.area ? deal.area + ' מ״ר' : dash()}</td>
+        <td>${deal.rooms != null ? deal.rooms : dash()}</td>
+        <td>${deal.floor != null ? deal.floor : dash()}</td>
+        <td>${deal.area ? deal.area + ' מ׳ר' : dash()}</td>
         <td>${deal.price ? '₪' + fmt(deal.price) : dash()}</td>
         <td class="price-sqm">${deal.pricePerSqm ? '₪' + fmt(deal.pricePerSqm) : dash()}</td>
       </tr>`;
     }).join('');
 
-    content.innerHTML = `
-      <table>
-        <thead><tr>${thead}</tr></thead>
-        <tbody>${tbody}</tbody>
-      </table>`;
+    content.innerHTML = `<table><thead><tr>${thead}</tr></thead><tbody>${tbody}</tbody></table>`;
   }
 
   function showEmpty() {
     document.getElementById('content').innerHTML = `
       <div id="empty-state">
         <h2>אין נתונים</h2>
-        <p>לחץ על כפתור <strong>סנכרון</strong> כדי למשוך את עסקאות הנדל״ן האחרונות בעתלית.</p>
+        <p>הרץ את <strong>sync_server.py</strong> על המחשב שלך ולחץ על <strong>סנכרון</strong>.</p>
       </div>`;
   }
 
   function sort(col) {
-    if (sortCol === col) sortAsc = !sortAsc;
-    else { sortCol = col; sortAsc = false; }
+    sortCol = col === sortCol && !sortAsc ? col : col;
+    sortAsc = col === sortCol ? !sortAsc : false;
+    sortCol = col;
     render();
   }
 
@@ -374,59 +306,93 @@
     if (sortCol === 'pricePerSqm') return deal.pricePerSqm;
     if (sortCol === 'rooms')       return deal.rooms;
     if (sortCol === 'floor')       return deal.floor;
-    if (sortCol === 'address')     return deal.address || '';
-    if (sortCol === 'type')        return deal.type || '';
-    return null;
+    return deal[sortCol] || '';
+  }
+
+  // ── Sync ──────────────────────────────────────────────────────────────────
+
+  async function syncDeals() {
+    const btn = document.getElementById('sync-btn');
+    btn.disabled = true;
+    btn.classList.add('spinning');
+    setStatus('מתחבר לשרת המקומי...', 'info');
+
+    try {
+      // Quick health check (2s timeout)
+      const hc = await fetch(LOCAL_SERVER + '/health', {
+        signal: AbortSignal.timeout(2000)
+      }).catch(() => null);
+
+      if (!hc || !hc.ok) {
+        openServerModal();
+        clearStatus();
+        return;
+      }
+
+      // Run sync (up to 2 minutes)
+      setStatus('שולף עסקאות מ-nadlan.gov.il... (עד דקה-שתיים)', 'info');
+      const res = await fetch(LOCAL_SERVER + '/sync', {
+        method: 'POST',
+        signal: AbortSignal.timeout(120000)
+      });
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        setStatus('שגיאה בסנכרון: ' + (body.error || res.status), 'error');
+        return;
+      }
+
+      setStatus('✔ הנתונים נשמרו ב-GitHub! הדף יתרענן אוטומטית עוד ~דקה...', 'success');
+
+      // Wait for GitHub Pages to propagate, then reload
+      setTimeout(async () => {
+        await loadData();
+        clearStatus();
+      }, RELOAD_DELAY);
+
+    } catch (e) {
+      if (e.name === 'TimeoutError' || e.name === 'AbortError') {
+        openServerModal();
+        clearStatus();
+      } else {
+        setStatus('שגיאה: ' + e.message, 'error');
+      }
+    } finally {
+      btn.disabled = false;
+      btn.classList.remove('spinning');
+    }
   }
 
   // ── Helpers ───────────────────────────────────────────────────────────────
 
   function isRecent(deal) {
     if (!deal.date) return false;
-    const d   = new Date(deal.date);
-    const now = new Date();
-    return (now - d) / (1000 * 60 * 60 * 24) <= 30;
+    return (Date.now() - new Date(deal.date)) / 86400000 <= 30;
   }
 
   function fmtDate(raw) {
     if (!raw) return dash();
     const d = new Date(raw);
     if (isNaN(d)) return raw;
-    const dd = String(d.getDate()).padStart(2, '0');
-    const mm = String(d.getMonth() + 1).padStart(2, '0');
-    return `<span class="date-badge">${dd}/${mm}/${d.getFullYear()}</span>`;
+    return `<span class="date-badge">${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}</span>`;
   }
 
   function fmtAddress(deal) {
-    const addr = deal.address || '';
-    const tag  = deal.newProject
-      ? `<span class="new-tag">פרויקט חדש</span>`
-      : '';
-    return tag + (addr || dash());
+    const tag = deal.newProject ? '<span class="new-tag">פרויקט חדש</span>' : '';
+    return tag + (deal.address || dash());
   }
 
-  function fmt(n) {
-    return Number(n).toLocaleString('he-IL');
-  }
-
-  function dash() {
-    return '<span class="null-val">—</span>';
-  }
+  function fmt(n) { return Number(n).toLocaleString('he-IL'); }
+  function dash() { return '<span class="null-val">—</span>'; }
 
   function formatDateTime(iso) {
     try {
       const d = new Date(iso);
-      const dd = String(d.getDate()).padStart(2,'0');
-      const mm = String(d.getMonth()+1).padStart(2,'0');
-      const hh = String(d.getHours()).padStart(2,'0');
-      const min= String(d.getMinutes()).padStart(2,'0');
-      return `${dd}/${mm}/${d.getFullYear()} ${hh}:${min}`;
+      return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
     } catch { return iso; }
   }
 
-  // ── Status ────────────────────────────────────────────────────────────────
-
-  function setStatus(msg, type = 'info') {
+  function setStatus(msg, type) {
     const el = document.getElementById('status-msg');
     el.className = type;
     el.textContent = msg;
@@ -436,129 +402,18 @@
     const el = document.getElementById('status-msg');
     el.className = '';
     el.textContent = '';
-    el.style.display = '';
   }
 
-  // ── Sync ──────────────────────────────────────────────────────────────────
-
-  async function syncDeals() {
-    const token = localStorage.getItem('github_pat');
-    if (!token) { openModal(); return; }
-    await runSync(token);
+  function openServerModal() {
+    document.getElementById('server-modal').classList.add('open');
   }
 
-  async function runSync(token) {
-    const btn = document.getElementById('sync-btn');
-    btn.disabled = true;
-    btn.classList.add('spinning');
-
-    setStatus('מפעיל סנכרון עם nadlan.gov.il…', 'info');
-
-    try {
-      const res = await fetch(
-        `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/workflows/${WORKFLOW_ID}/dispatches`,
-        {
-          method: 'POST',
-          headers: {
-            Authorization: `token ${token}`,
-            Accept: 'application/vnd.github+json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ ref: BRANCH }),
-        }
-      );
-
-      if (res.status === 404) {
-        setStatus('שגיאה: ה-workflow לא נמצא. ודא שה-PR מוזג ל-main.', 'error');
-        return;
-      }
-      if (res.status === 401 || res.status === 403) {
-        localStorage.removeItem('github_pat');
-        setStatus('הטוקן שגוי או פג תוקף. נסה שוב.', 'error');
-        openModal();
-        return;
-      }
-      if (!res.ok) {
-        setStatus(`שגיאה בהפעלת הסנכרון (${res.status})`, 'error');
-        return;
-      }
-
-      setStatus('✔ הסנכרון הופעל! הנתונים יתעדכנו תוך 2–3 דקות. ממתין לעדכון…', 'info');
-      await pollForUpdate(token);
-
-    } catch (e) {
-      setStatus('שגיאת רשת: ' + e.message, 'error');
-    } finally {
-      btn.disabled = false;
-      btn.classList.remove('spinning');
-    }
+  function closeServerModal() {
+    document.getElementById('server-modal').classList.remove('open');
   }
 
-  async function pollForUpdate(token) {
-    // Poll the workflow runs list until a new run completes
-    const started = Date.now();
-    const maxWait = 5 * 60 * 1000; // 5 minutes
-
-    await sleep(10000); // wait 10s before first check
-
-    while (Date.now() - started < maxWait) {
-      try {
-        const res = await fetch(
-          `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/workflows/${WORKFLOW_ID}/runs?per_page=1`,
-          { headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github+json' } }
-        );
-        if (!res.ok) break;
-        const data = await res.json();
-        const run  = data.workflow_runs?.[0];
-        if (run && run.status === 'completed' && run.conclusion === 'success') {
-          setStatus('✔ הנתונים עודכנו בהצלחה! מרענן…', 'success');
-          await sleep(2000);
-          await loadData();
-          clearStatus();
-          return;
-        }
-        if (run && run.status === 'completed' && run.conclusion !== 'success') {
-          setStatus('⚠ הסנכרון הסתיים עם שגיאה. בדוק את ה-Actions בגיטהאב.', 'error');
-          return;
-        }
-      } catch (_) { /* ignore poll errors */ }
-
-      const elapsed = Math.round((Date.now() - started) / 1000);
-      setStatus(`ממתין לסיום הסנכרון… (${elapsed} שניות עברו)`, 'info');
-      await sleep(15000);
-    }
-
-    setStatus('הסנכרון עשוי להימשך עוד קצת – רענן את הדף ידנית בעוד דקה.', 'info');
-  }
-
-  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
-
-  // ── PAT Modal ─────────────────────────────────────────────────────────────
-
-  function openModal() {
-    document.getElementById('pat-modal').classList.add('open');
-    document.getElementById('pat-input').value = localStorage.getItem('github_pat') || '';
-    document.getElementById('pat-input').focus();
-  }
-
-  function closeModal() {
-    document.getElementById('pat-modal').classList.remove('open');
-  }
-
-  async function savePat() {
-    const val = document.getElementById('pat-input').value.trim();
-    if (!val) { alert('נא להזין טוקן.'); return; }
-    localStorage.setItem('github_pat', val);
-    closeModal();
-    await runSync(val);
-  }
-
-  document.getElementById('pat-modal').addEventListener('click', e => {
-    if (e.target === e.currentTarget) closeModal();
-  });
-
-  document.getElementById('pat-input').addEventListener('keydown', e => {
-    if (e.key === 'Enter') savePat();
+  document.getElementById('server-modal').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeServerModal();
   });
 
   // ── Init ──────────────────────────────────────────────────────────────────
