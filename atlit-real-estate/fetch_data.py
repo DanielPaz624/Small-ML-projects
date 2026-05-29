@@ -1,119 +1,73 @@
 """
-Fetches real estate transactions for Atlit (עתלית) from nadlan.gov.il REST API.
-Writes the last 50 deals (sorted by date, newest first) to data/deals.json.
+Fetches real estate transactions for Atlit (עתלית) from nadlan.gov.il.
+Uses Playwright to open the settlement page in a real browser so that
+reCAPTCHA passes automatically, then intercepts the /deal-data API response.
 
 Usage:
-    pip install requests
+    pip install playwright
+    python -m playwright install chromium
     python fetch_data.py
 """
 
+import asyncio
+import base64
+import gzip
 import json
 import os
-import time
 from datetime import datetime
 
-import requests
+from playwright.async_api import async_playwright
 
-BASE_URL = "https://www.nadlan.gov.il/Nadlan.REST"
-OUTPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "deals.json")
-CITY_NAME = "עתלית"
-MAX_DEALS = 50
-# Area sanity range in sqm: filter out storage rooms, parking, land, and huge commercial
+SETTLEMENT_ID = 53          # עתלית
 MIN_AREA_SQM = 20
 MAX_AREA_SQM = 500
+TIMEOUT_S = 30
 
-SESSION_HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/124.0.0.0 Safari/537.36"
-    ),
-    "Accept": "application/json, text/plain, */*",
-    "Accept-Language": "he-IL,he;q=0.9,en-US;q=0.8,en;q=0.7",
-    "Referer": "https://www.nadlan.gov.il/",
-    "Origin": "https://www.nadlan.gov.il",
-}
+OUTPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "deals.json")
 
 
-def make_session() -> requests.Session:
-    session = requests.Session()
-    session.headers.update(SESSION_HEADERS)
-    # Warm up session / get cookies
-    try:
-        session.get("https://www.nadlan.gov.il/", timeout=15)
-    except Exception:
-        pass
-    return session
+async def _fetch_raw() -> list:
+    raw_items = []
+
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(headless=False)
+        page = await browser.new_page()
+
+        async def handle_response(response):
+            if "deal-data" not in response.url:
+                return
+            if response.status != 200:
+                return
+            try:
+                body = await response.body()
+                decoded = gzip.decompress(base64.b64decode(body.decode()))
+                data = json.loads(decoded)
+                items = data.get("data", {}).get("items", [])
+                if items:
+                    raw_items.extend(items)
+                    total = data.get("data", {}).get("total_rows", 0)
+                    print(f"Intercepted deal-data: {len(items)} items (total on server: {total})")
+            except Exception as e:
+                print(f"Response decode error: {e}")
+
+        page.on("response", handle_response)
+
+        url = f"https://www.nadlan.gov.il/?view=settlement&id={SETTLEMENT_ID}"
+        print(f"Opening {url} ...")
+        await page.goto(url, wait_until="domcontentloaded", timeout=30000)
+
+        print(f"Waiting up to {TIMEOUT_S}s for deal data...")
+        for _ in range(TIMEOUT_S):
+            await asyncio.sleep(1)
+            if raw_items:
+                break
+
+        await browser.close()
+
+    return raw_items
 
 
-def get_city_id(session: requests.Session) -> str:
-    print(f"Fetching city list to find '{CITY_NAME}'...")
-    resp = session.get(
-        f"{BASE_URL}/Main/GetCitysList",
-        params={"nb": "true", "st": "true"},
-        timeout=30,
-    )
-    resp.raise_for_status()
-    cities = resp.json()
-
-    # The API may return a list or a dict with a nested list
-    if isinstance(cities, dict):
-        cities = cities.get("Data", cities.get("data", cities.get("Results", [])))
-
-    for city in cities:
-        name = (
-            city.get("SETTELMENT_NAME")
-            or city.get("settlementName")
-            or city.get("cityName")
-            or city.get("CityName")
-            or ""
-        )
-        if CITY_NAME in str(name):
-            city_id = (
-                city.get("SETTELMENT_ID")
-                or city.get("settlementId")
-                or city.get("cityId")
-                or city.get("CityId")
-            )
-            print(f"Found city ID: {city_id} for '{name}'")
-            return str(city_id)
-
-    raise ValueError(f"City '{CITY_NAME}' not found in city list. Got {len(cities)} cities.")
-
-
-def fetch_all_deals(session: requests.Session, city_id: str) -> list:
-    all_deals = []
-    page = 1
-    while True:
-        print(f"  Fetching page {page}...")
-        resp = session.post(
-            f"{BASE_URL}/Main/GetAssestAndDeals",
-            json={
-                "ObjectID": city_id,
-                "CurrentLavel": 2,   # intentional typo in the original API
-                "ObjectKey": "UNIQ_ID",
-                "ObjectIDType": "text",
-                "PageNo": page,
-            },
-            timeout=30,
-        )
-        resp.raise_for_status()
-        data = resp.json()
-
-        results = data.get("AllResults") or data.get("allResults") or []
-        all_deals.extend(results)
-        print(f"    Got {len(results)} deals (total so far: {len(all_deals)})")
-
-        is_last = data.get("IsLastPage") or data.get("isLastPage") or not results
-        if is_last:
-            break
-        page += 1
-        time.sleep(0.5)  # be gentle with the API
-
-    return all_deals
-
-
-def coerce_float(value) -> float | None:
+def _coerce_float(value) -> float | None:
     if value is None or value == "" or value == 0:
         return None
     try:
@@ -122,101 +76,84 @@ def coerce_float(value) -> float | None:
         return None
 
 
-def pick(deal: dict, *keys):
-    """Return the first non-empty value found among the given keys."""
-    for key in keys:
-        v = deal.get(key)
-        if v is not None and v != "" and v != 0:
-            return v
-    return None
-
-
-def parse_date(raw: str | None) -> str | None:
-    if not raw:
-        return None
-    try:
-        # ISO format: "2024-03-15T00:00:00" or "2024-03-15"
-        return raw.split("T")[0]
-    except Exception:
-        return str(raw)
-
-
-def process_deals(raw_deals: list) -> list:
+def _process(raw_deals: list) -> list:
     processed = []
     for deal in raw_deals:
-        area = coerce_float(pick(deal, "assetArea", "ASSETAREA", "AssetArea"))
-        price = coerce_float(pick(deal, "dealAmount", "DEALAMOUNT", "DealAmount"))
-        date_str = parse_date(
-            pick(deal, "dealDate", "DEALDATE", "DealDate", "DEALDATETIME", "dealDateTime")
-        )
+        area = _coerce_float(deal.get("assetArea"))
+        price = _coerce_float(deal.get("dealAmount"))
+        date_str = (deal.get("dealDate") or "").split("T")[0] or None
 
         area_valid = area is not None and MIN_AREA_SQM <= area <= MAX_AREA_SQM
         price_per_sqm = (
             round(price / area) if (area_valid and price and price > 0) else None
         )
+        if deal.get("priceSM") and not price_per_sqm:
+            price_per_sqm = round(deal["priceSM"])
 
-        rooms_raw = pick(deal, "assetRoomNum", "ASSETROOMNUM", "AssetRoomNum")
-        try:
-            rooms = float(rooms_raw) if rooms_raw is not None else None
-        except (ValueError, TypeError):
-            rooms = None
+        rooms = _coerce_float(deal.get("roomNum"))
+        floor = deal.get("floor")  # string in new API e.g. "3", "מרתף קרקע *"
 
-        floor_raw = pick(deal, "floorNumber", "FLOORNUMBER", "FloorNumber")
-        try:
-            floor = int(float(str(floor_raw))) if floor_raw is not None else None
-        except (ValueError, TypeError):
-            floor = None
+        processed.append({
+            "date": date_str,
+            "address": deal.get("address") or "",
+            "type": deal.get("dealNature"),
+            "rooms": rooms,
+            "floor": floor,
+            "area": round(area, 1) if area_valid else None,
+            "price": round(price) if price else None,
+            "pricePerSqm": price_per_sqm,
+            "city": "עתלית",
+            "newProject": None,
+        })
 
-        processed.append(
-            {
-                "date": date_str,
-                "address": (
-                    pick(deal, "FULLADRESS", "DISPLAYADRESS", "fullAddress", "streetName")
-                    or ""
-                ),
-                "type": pick(
-                    deal,
-                    "propertyTypeDescription",
-                    "PROPERTYTYPEDESCRIPTION",
-                    "PropertyTypeDescription",
-                ),
-                "rooms": rooms,
-                "floor": floor,
-                "area": round(area, 1) if area_valid else None,
-                "price": round(price) if price else None,
-                "pricePerSqm": price_per_sqm,
-                "city": pick(deal, "settlementNameHeb", "SETTELMENT_NAME") or CITY_NAME,
-                "newProject": pick(deal, "NEWPROJECTTEXT", "PROJECTNAME", "newProjectText"),
-            }
-        )
+    processed.sort(key=lambda d: d.get("date") or "", reverse=True)
+    return processed
 
-    def sort_key(d):
-        raw = d.get("date") or ""
-        try:
-            return datetime.strptime(raw, "%Y-%m-%d")
-        except Exception:
-            return datetime.min
 
-    processed.sort(key=sort_key, reverse=True)
-    return processed[:MAX_DEALS]
+def _merge(existing: list, fresh: list) -> list:
+    index: dict[tuple, int] = {}
+    merged = list(existing)
+    for i, d in enumerate(merged):
+        index[(d["address"], d["price"], d["area"])] = i
+
+    added = 0
+    for d in fresh:
+        key = (d["address"], d["price"], d["area"])
+        if key in index:
+            if not merged[index[key]]["type"] and d["type"]:
+                merged[index[key]] = d
+        else:
+            index[key] = len(merged)
+            merged.append(d)
+            added += 1
+
+    merged.sort(key=lambda d: d.get("date") or "", reverse=True)
+    print(f"Merged: {added} new deal(s) added, {len(merged)} total stored.")
+    return merged
 
 
 def main():
-    session = make_session()
+    existing: list = []
+    if os.path.exists(OUTPUT_PATH):
+        with open(OUTPUT_PATH, encoding="utf-8") as f:
+            existing = json.load(f).get("deals", [])
+        print(f"Loaded {len(existing)} existing deals from {OUTPUT_PATH}")
 
-    city_id = get_city_id(session)
-    print(f"Fetching deals for Atlit (city_id={city_id})...")
-    raw = fetch_all_deals(session, city_id)
+    raw = asyncio.run(_fetch_raw())
     print(f"Total raw deals fetched: {len(raw)}")
 
-    deals = process_deals(raw)
-    print(f"Processed deals (after filter & sort): {len(deals)}")
+    if not raw:
+        print("No deals captured — browser may have been blocked by reCAPTCHA.")
+        return
+
+    fresh = _process(raw)
+    deals = _merge(existing, fresh)
 
     os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
 
     output = {
         "lastUpdated": datetime.now().isoformat(),
-        "totalRaw": len(raw),
+        "totalStored": len(deals),
         "deals": deals,
     }
 

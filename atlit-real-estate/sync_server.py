@@ -2,7 +2,8 @@
 Local sync server for the Atlit real estate tracker.
 
 Run this on your machine (in Israel) to enable the Sync button:
-    pip install requests
+    pip install playwright
+    python -m playwright install chromium
     python atlit-real-estate/sync_server.py
 
 Keep the terminal open while using the website.
