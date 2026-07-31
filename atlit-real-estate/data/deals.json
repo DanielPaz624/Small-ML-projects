@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-07-31T13:07:38.743265",
-  "totalStored": 505,
+  "lastUpdated": "2026-07-31T16:54:20.696945",
+  "totalStored": 527,
   "deals": [
     {
       "date": "2026-06-04",
@@ -59,6 +59,18 @@
       "area": 81,
       "price": 1775000,
       "pricePerSqm": 21914,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
+      "date": "2026-05-20",
+      "address": "מפרש 10",
+      "type": null,
+      "rooms": 3.0,
+      "floor": "שניה",
+      "area": 81.0,
+      "price": 1800000,
+      "pricePerSqm": 22222,
       "city": "עתלית",
       "newProject": null
     },
@@ -131,6 +143,18 @@
       "area": 160,
       "price": 3640000,
       "pricePerSqm": 22750,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
+      "date": "2026-04-22",
+      "address": "השדות 14",
+      "type": null,
+      "rooms": 5.0,
+      "floor": null,
+      "area": 164.0,
+      "price": 4040000,
+      "pricePerSqm": 24634,
       "city": "עתלית",
       "newProject": null
     },
@@ -220,6 +244,18 @@
       "newProject": null
     },
     {
+      "date": "2026-03-31",
+      "address": "מפרש 10",
+      "type": null,
+      "rooms": 3.0,
+      "floor": "ראשונה",
+      "area": 73.0,
+      "price": 1920000,
+      "pricePerSqm": 26301,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
       "date": "2026-03-30",
       "address": "הרקפת 15",
       "type": "קרקע למגורים",
@@ -244,6 +280,18 @@
       "city": "עתלית",
       "newProject": null,
       "excludedFromAvg": true
+    },
+    {
+      "date": "2026-03-30",
+      "address": "חמנייה 9",
+      "type": "דירה בבית קומות",
+      "rooms": 5.0,
+      "floor": null,
+      "area": 170.0,
+      "price": 4200000,
+      "pricePerSqm": 24706,
+      "city": "עתלית",
+      "newProject": null
     },
     {
       "date": "2026-03-29",
@@ -874,6 +922,18 @@
       "newProject": null
     },
     {
+      "date": "2025-11-01",
+      "address": "מפרש 10",
+      "type": null,
+      "rooms": 4.0,
+      "floor": "שלישית",
+      "area": 100.0,
+      "price": 2570000,
+      "pricePerSqm": 25700,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
       "date": "2025-10-28",
       "address": "שושנת הים 6",
       "type": "דירה בבית קומות",
@@ -1018,6 +1078,18 @@
       "newProject": null
     },
     {
+      "date": "2025-10-04",
+      "address": "מפרש 10",
+      "type": null,
+      "rooms": 5.0,
+      "floor": "ראשונה",
+      "area": 114.0,
+      "price": 2980000,
+      "pricePerSqm": 26140,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
       "date": "2025-10-01",
       "address": "נחל גלים 14",
       "type": "דירה בבית קומות",
@@ -1086,6 +1158,18 @@
       "area": 111,
       "price": 2625000,
       "pricePerSqm": 23649,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
+      "date": "2025-09-04",
+      "address": "החורש 19",
+      "type": "קוטג' חד משפחתי",
+      "rooms": 6.0,
+      "floor": null,
+      "area": 209.0,
+      "price": 492000,
+      "pricePerSqm": 2354,
       "city": "עתלית",
       "newProject": null
     },
@@ -1336,6 +1420,18 @@
       "rooms": 5,
       "floor": "שלישית",
       "area": 133,
+      "price": 3180000,
+      "pricePerSqm": 23910,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
+      "date": "2025-07-07",
+      "address": "סירה 3",
+      "type": null,
+      "rooms": 5.0,
+      "floor": null,
+      "area": 133.0,
       "price": 3180000,
       "pricePerSqm": 23910,
       "city": "עתלית",
@@ -2146,6 +2242,18 @@
       "newProject": null
     },
     {
+      "date": "2025-02-26",
+      "address": "סירה 16",
+      "type": null,
+      "rooms": 5.0,
+      "floor": "שניה",
+      "area": 154.0,
+      "price": 3552001,
+      "pricePerSqm": 23065,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
       "date": "2025-02-25",
       "address": "השדות 17",
       "type": "דירה בבית קומות",
@@ -2710,6 +2818,18 @@
       "newProject": null
     },
     {
+      "date": "2024-12-11",
+      "address": "השדות 31",
+      "type": null,
+      "rooms": 6.0,
+      "floor": null,
+      "area": 177.0,
+      "price": 4100000,
+      "pricePerSqm": 23164,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
       "date": "2024-12-10",
       "address": "עוגן 9",
       "type": "קרקע למגורים",
@@ -3267,6 +3387,18 @@
       "type": "קוטג' דו משפחתי",
       "rooms": 5,
       "floor": "ראשונה",
+      "area": null,
+      "price": 3980000,
+      "pricePerSqm": null,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
+      "date": "2024-07-23",
+      "address": "הרקפת 12",
+      "type": null,
+      "rooms": 5.0,
+      "floor": null,
       "area": null,
       "price": 3980000,
       "pricePerSqm": null,
@@ -4594,6 +4726,18 @@
       "newProject": null
     },
     {
+      "date": "2023-10-25",
+      "address": "0",
+      "type": null,
+      "rooms": 6.0,
+      "floor": null,
+      "area": 206.0,
+      "price": 3200000,
+      "pricePerSqm": 15534,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
       "date": "2023-10-24",
       "address": "החרוב 11",
       "type": "דירה בבית קומות",
@@ -4846,6 +4990,18 @@
       "newProject": null
     },
     {
+      "date": "2023-07-30",
+      "address": "0",
+      "type": null,
+      "rooms": 6.0,
+      "floor": null,
+      "area": 247.0,
+      "price": 3230000,
+      "pricePerSqm": 13077,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
       "date": "2023-07-25",
       "address": "שושנת הים 21",
       "type": "דירה בבית קומות",
@@ -5026,6 +5182,18 @@
       "newProject": null
     },
     {
+      "date": "2023-05-22",
+      "address": "0",
+      "type": null,
+      "rooms": 6.0,
+      "floor": null,
+      "area": 206.0,
+      "price": 3200000,
+      "pricePerSqm": 15534,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
       "date": "2023-05-18",
       "address": "0",
       "type": "קרקע למגורים",
@@ -5116,6 +5284,18 @@
       "rooms": 6,
       "floor": "רביעית",
       "area": 263,
+      "price": 3950000,
+      "pricePerSqm": 15019,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
+      "date": "2023-04-12",
+      "address": "0",
+      "type": null,
+      "rooms": 6.0,
+      "floor": null,
+      "area": 263.0,
       "price": 3950000,
       "pricePerSqm": 15019,
       "city": "עתלית",
@@ -5238,6 +5418,18 @@
       "area": 177,
       "price": 3800000,
       "pricePerSqm": 21469,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
+      "date": "2023-03-15",
+      "address": "0",
+      "type": null,
+      "rooms": 7.0,
+      "floor": null,
+      "area": 270.0,
+      "price": 3915000,
+      "pricePerSqm": 14500,
       "city": "עתלית",
       "newProject": null
     },
@@ -5386,6 +5578,18 @@
       "newProject": null
     },
     {
+      "date": "2023-02-28",
+      "address": "0",
+      "type": null,
+      "rooms": 6.0,
+      "floor": null,
+      "area": 210.0,
+      "price": 3150000,
+      "pricePerSqm": 15000,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
       "date": "2023-02-23",
       "address": "0",
       "type": "דירה בבית קומות",
@@ -5494,6 +5698,18 @@
       "newProject": null
     },
     {
+      "date": "2023-02-07",
+      "address": "0",
+      "type": null,
+      "rooms": 6.0,
+      "floor": null,
+      "area": 270.0,
+      "price": 4000000,
+      "pricePerSqm": 14815,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
       "date": "2023-02-05",
       "address": "חצב 1",
       "type": "ללא תיכנון",
@@ -5538,6 +5754,18 @@
       "area": 76.5,
       "price": 1450000,
       "pricePerSqm": 18942,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
+      "date": "2023-01-28",
+      "address": "0",
+      "type": null,
+      "rooms": 6.0,
+      "floor": null,
+      "area": 263.0,
+      "price": 4000000,
+      "pricePerSqm": 15209,
       "city": "עתלית",
       "newProject": null
     },
@@ -5686,6 +5914,18 @@
       "newProject": null
     },
     {
+      "date": "2022-12-20",
+      "address": "0",
+      "type": "דירה בבית קומות",
+      "rooms": 6.0,
+      "floor": "שניה",
+      "area": 210.0,
+      "price": 2309000,
+      "pricePerSqm": 10995,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
       "date": "2022-12-19",
       "address": "0",
       "type": null,
@@ -5818,6 +6058,18 @@
       "newProject": null
     },
     {
+      "date": "2022-11-28",
+      "address": "הצבעוני 59",
+      "type": "קרקע למגורים",
+      "rooms": null,
+      "floor": null,
+      "area": null,
+      "price": 1800000,
+      "pricePerSqm": null,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
       "date": "2022-11-27",
       "address": "האלון 14",
       "type": "דירה בבית קומות",
@@ -5872,6 +6124,18 @@
       "rooms": 6,
       "floor": "שלישית",
       "area": 210,
+      "price": 3250000,
+      "pricePerSqm": 15476,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
+      "date": "2022-11-22",
+      "address": "0",
+      "type": null,
+      "rooms": 6.0,
+      "floor": null,
+      "area": 210.0,
       "price": 3250000,
       "pricePerSqm": 15476,
       "city": "עתלית",
