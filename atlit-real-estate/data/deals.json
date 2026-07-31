@@ -133,14 +133,16 @@
     {
       "date": "2026-04-23",
       "address": "השדות 14",
-      "type": "דירה בבית קומות",
+      "type": "קוטג' דו משפחתי",
       "rooms": 5,
       "floor": null,
       "area": 164,
       "price": 4040000,
       "pricePerSqm": 24634,
       "city": "עתלית",
-      "newProject": null
+      "newProject": null,
+      "typeOriginal": "דירה בבית קומות",
+      "typeManual": true
     },
     {
       "date": "2026-04-23",
@@ -157,14 +159,16 @@
     {
       "date": "2026-04-22",
       "address": "השדות 14",
-      "type": null,
+      "type": "קוטג' דו משפחתי",
       "rooms": 5,
       "floor": null,
       "area": 164,
       "price": 4040000,
       "pricePerSqm": 24634,
       "city": "עתלית",
-      "newProject": null
+      "newProject": null,
+      "typeOriginal": null,
+      "typeManual": true
     },
     {
       "date": "2026-04-17",
@@ -254,14 +258,16 @@
     {
       "date": "2026-03-31",
       "address": "מפרש 10",
-      "type": null,
+      "type": "דירה בבית קומות",
       "rooms": 3,
       "floor": "ראשונה",
       "area": 73,
       "price": 1920000,
       "pricePerSqm": 26301,
       "city": "עתלית",
-      "newProject": null
+      "newProject": null,
+      "typeOriginal": null,
+      "typeManual": true
     },
     {
       "date": "2026-03-30",
