@@ -539,14 +539,16 @@
     {
       "date": "2026-02-18",
       "address": "השדות 17",
-      "type": null,
+      "type": "קוטג' דו משפחתי",
       "rooms": 5,
       "floor": null,
       "area": 164,
       "price": 4040000,
       "pricePerSqm": 24634,
       "city": "עתלית",
-      "newProject": null
+      "newProject": null,
+      "typeOriginal": null,
+      "typeManual": true
     },
     {
       "date": "2026-02-18",
