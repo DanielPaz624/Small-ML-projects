@@ -180,7 +180,8 @@
       "price": 210000,
       "pricePerSqm": null,
       "city": "עתלית",
-      "newProject": null
+      "newProject": null,
+      "excludedFromAvg": true
     },
     {
       "date": "2026-04-07",
@@ -228,7 +229,8 @@
       "price": 466000,
       "pricePerSqm": null,
       "city": "עתלית",
-      "newProject": null
+      "newProject": null,
+      "excludedFromAvg": true
     },
     {
       "date": "2026-03-30",
@@ -649,7 +651,8 @@
       "price": 1017000,
       "pricePerSqm": 4068,
       "city": "עתלית",
-      "newProject": null
+      "newProject": null,
+      "excludedFromAvg": true
     },
     {
       "date": "2025-12-29",
@@ -829,7 +832,8 @@
       "price": 2150000,
       "pricePerSqm": 4309,
       "city": "עתלית",
-      "newProject": null
+      "newProject": null,
+      "excludedFromAvg": true
     },
     {
       "date": "2025-11-04",
@@ -841,7 +845,8 @@
       "price": 1400000,
       "pricePerSqm": 2772,
       "city": "עתלית",
-      "newProject": null
+      "newProject": null,
+      "excludedFromAvg": true
     },
     {
       "date": "2025-11-03",
