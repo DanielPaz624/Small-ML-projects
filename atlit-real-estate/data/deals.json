@@ -53,38 +53,44 @@
     {
       "date": "2026-05-20",
       "address": "מפרש 10",
-      "type": null,
+      "type": "דירה בבית קומות",
       "rooms": 3,
       "floor": "שניה",
       "area": 81,
       "price": 1775000,
       "pricePerSqm": 21914,
       "city": "עתלית",
-      "newProject": null
+      "newProject": null,
+      "typeOriginal": null,
+      "typeManual": true
     },
     {
       "date": "2026-05-20",
       "address": "מפרש 10",
-      "type": null,
+      "type": "דירה בבית קומות",
       "rooms": 3,
       "floor": "שניה",
       "area": 81,
       "price": 1800000,
       "pricePerSqm": 22222,
       "city": "עתלית",
-      "newProject": null
+      "newProject": null,
+      "typeOriginal": null,
+      "typeManual": true
     },
     {
       "date": "2026-05-16",
       "address": "מפרש 10",
-      "type": null,
+      "type": "דירה בבית קומות",
       "rooms": 3,
       "floor": "ראשונה",
       "area": 81,
       "price": 2100000,
       "pricePerSqm": 25926,
       "city": "עתלית",
-      "newProject": null
+      "newProject": null,
+      "typeOriginal": null,
+      "typeManual": true
     },
     {
       "date": "2026-05-12",
