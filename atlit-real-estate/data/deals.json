@@ -1,7 +1,103 @@
 {
-  "lastUpdated": "2026-07-31T16:54:52.109306",
-  "totalStored": 527,
+  "lastUpdated": "2026-10-16T14:40:27.148355",
+  "totalStored": 546,
   "deals": [
+    {
+      "date": "2026-07-09",
+      "address": "אנפה 12",
+      "type": "דירה בבית קומות",
+      "rooms": 5.0,
+      "floor": "ראשונה",
+      "area": 114.0,
+      "price": 2525000,
+      "pricePerSqm": 22149,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
+      "date": "2026-07-03",
+      "address": "שלדג 7",
+      "type": "דירה בבית קומות",
+      "rooms": 3.0,
+      "floor": "קומה ‎2‏",
+      "area": 96.1,
+      "price": 1952000,
+      "pricePerSqm": 20310,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
+      "date": "2026-06-26",
+      "address": "נחל אלונה 5",
+      "type": "קוטג' דו משפחתי",
+      "rooms": 5.0,
+      "floor": null,
+      "area": 170.0,
+      "price": 4250000,
+      "pricePerSqm": 25000,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
+      "date": "2026-06-22",
+      "address": "מפרש 13",
+      "type": "דירה בבית קומות",
+      "rooms": 3.0,
+      "floor": "שניה",
+      "area": 99.0,
+      "price": 1870000,
+      "pricePerSqm": 18889,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
+      "date": "2026-06-16",
+      "address": "הלילך 35",
+      "type": "קרקע למגורים",
+      "rooms": null,
+      "floor": null,
+      "area": 351.0,
+      "price": 2700000,
+      "pricePerSqm": 7692,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
+      "date": "2026-06-12",
+      "address": "האגוז 12",
+      "type": "קוטג' חד משפחתי",
+      "rooms": 5.0,
+      "floor": null,
+      "area": 200.0,
+      "price": 3000000,
+      "pricePerSqm": 15000,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
+      "date": "2026-06-11",
+      "address": "מפרש 10",
+      "type": "דירה בבית קומות",
+      "rooms": 3.0,
+      "floor": "ראשונה",
+      "area": 73.0,
+      "price": 1950000,
+      "pricePerSqm": 26712,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
+      "date": "2026-06-10",
+      "address": "מפרש 10",
+      "type": null,
+      "rooms": 3.0,
+      "floor": "ראשונה",
+      "area": 73.0,
+      "price": 1950000,
+      "pricePerSqm": 26712,
+      "city": "עתלית",
+      "newProject": null
+    },
     {
       "date": "2026-06-04",
       "address": "מפרש 1",
@@ -11,6 +107,18 @@
       "area": 113,
       "price": 2270000,
       "pricePerSqm": 20088,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
+      "date": "2026-06-04",
+      "address": "שלדג 1",
+      "type": "דירה בבית קומות",
+      "rooms": 4.0,
+      "floor": "קומה ‎2‏",
+      "area": 120.0,
+      "price": 2520000,
+      "pricePerSqm": 21000,
       "city": "עתלית",
       "newProject": null
     },
@@ -77,6 +185,42 @@
       "newProject": null,
       "typeOriginal": null,
       "typeManual": true
+    },
+    {
+      "date": "2026-05-19",
+      "address": "הסיגלית 1",
+      "type": "קרקע למגורים",
+      "rooms": null,
+      "floor": null,
+      "area": null,
+      "price": 174000,
+      "pricePerSqm": 335,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
+      "date": "2026-05-18",
+      "address": "נחל דלייה 32",
+      "type": "קוטג' דו משפחתי",
+      "rooms": 5.0,
+      "floor": null,
+      "area": 160.0,
+      "price": 3630000,
+      "pricePerSqm": 22688,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
+      "date": "2026-05-17",
+      "address": "מפרש 10",
+      "type": "דירה בבית קומות",
+      "rooms": 3.0,
+      "floor": "ראשונה",
+      "area": 81.0,
+      "price": 2100000,
+      "pricePerSqm": 25926,
+      "city": "עתלית",
+      "newProject": null
     },
     {
       "date": "2026-05-16",
@@ -331,6 +475,30 @@
       "city": "עתלית",
       "newProject": null,
       "areaManual": true
+    },
+    {
+      "date": "2026-03-29",
+      "address": "אנפה 1",
+      "type": "לא מעובדת",
+      "rooms": null,
+      "floor": null,
+      "area": null,
+      "price": 5278000,
+      "pricePerSqm": 7290,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
+      "date": "2026-03-29",
+      "address": "תלם 11",
+      "type": "קרקע למגורים",
+      "rooms": null,
+      "floor": null,
+      "area": null,
+      "price": 2130000,
+      "pricePerSqm": null,
+      "city": "עתלית",
+      "newProject": null
     },
     {
       "date": "2026-03-27",
@@ -599,6 +767,18 @@
       "newProject": null
     },
     {
+      "date": "2026-02-10",
+      "address": "הסחלב 14",
+      "type": "קרקע למגורים",
+      "rooms": null,
+      "floor": null,
+      "area": null,
+      "price": 4600000,
+      "pricePerSqm": null,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
       "date": "2026-02-08",
       "address": "נחל ברקן 15",
       "type": "דירה בבית קומות",
@@ -623,6 +803,18 @@
       "newProject": null
     },
     {
+      "date": "2026-02-04",
+      "address": "הגורן 44",
+      "type": "קוטג' טורי",
+      "rooms": 5.0,
+      "floor": null,
+      "area": 202.0,
+      "price": 4700000,
+      "pricePerSqm": 23267,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
       "date": "2026-02-03",
       "address": "הצבעוני 106",
       "type": "ללא תיכנון",
@@ -643,6 +835,18 @@
       "area": 147,
       "price": 3800000,
       "pricePerSqm": 25850,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
+      "date": "2026-01-26",
+      "address": "0",
+      "type": "ללא תיכנון",
+      "rooms": null,
+      "floor": null,
+      "area": null,
+      "price": 1370000,
+      "pricePerSqm": null,
       "city": "עתלית",
       "newProject": null
     },
@@ -3363,6 +3567,18 @@
       "newProject": null
     },
     {
+      "date": "2024-08-05",
+      "address": "0",
+      "type": "מגורים",
+      "rooms": null,
+      "floor": null,
+      "area": null,
+      "price": 3724000,
+      "pricePerSqm": 6722,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
       "date": "2024-08-04",
       "address": "נחל שלף 8",
       "type": "דירה בבית קומות",
@@ -3847,6 +4063,18 @@
       "address": "שחף 14",
       "type": "דירה בבית קומות",
       "rooms": 4,
+      "floor": "קומה ‎2‏",
+      "area": 118.1,
+      "price": 2240000,
+      "pricePerSqm": 18961,
+      "city": "עתלית",
+      "newProject": null
+    },
+    {
+      "date": "2024-05-07",
+      "address": "שחף 22",
+      "type": "דירה בבית קומות",
+      "rooms": 4.0,
       "floor": "קומה ‎2‏",
       "area": 118.1,
       "price": 2240000,
